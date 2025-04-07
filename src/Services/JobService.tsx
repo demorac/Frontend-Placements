@@ -35,7 +35,7 @@ const changeAppStatus = async (application:any) => {
 };
 const getMatchingProfiles = async (jobId: any) => {
     console.log("Fetching matching profiles for job:", jobId); // ✅ Debugging Log
-    return axiosInstance.get(`http://localhost:8080/jobs/matching-profiles/${jobId}`)
+    return axiosInstance.get(`https://private-job-portal.onrender.com/jobs/matching-profiles/${jobId}`)
         .then(res => res.data)
         .catch(error => {
             console.error("Backend Error:", error.response?.data); // ✅ Debugging
