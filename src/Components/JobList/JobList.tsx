@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { getAllJobs } from "../../Services/JobService";
 import { TextInput, Pagination } from "@mantine/core";
-import Jobx from "./Jobx";
 
-// Define Job interface (adjust fields to match your backend model)
+// Define job structure from your backend response
 interface Job {
-  id: string;
+  id: number;
   jobTitle: string;
-  jobStatus: string;
-  // Add other fields like jobDescription, companyName, etc. if needed
+  company: string;
+  // Add more fields if needed: about, applicants, etc.
 }
 
 const JobList = () => {
@@ -24,17 +23,17 @@ const JobList = () => {
         console.log("✅ Jobs fetched:", data);
         setJobs(data);
       })
-      .catch((err) => console.error("❌ Error fetching jobs:", err));
+      .catch((err) => {
+        console.error("❌ Error fetching jobs:", err);
+      });
   }, []);
 
-  // Filter only ACTIVE jobs and match job title
-  const filteredJobs = jobs
-    .filter((job) => job.jobStatus === "ACTIVE")
-    .filter((job) =>
-      job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  // Filter by job title
+  const filteredJobs = jobs.filter((job) =>
+    job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  // Pagination
+  // Paginate
   const startIndex = (activePage - 1) * itemsPerPage;
   const paginatedJobs = filteredJobs.slice(startIndex, startIndex + itemsPerPage);
   const totalPages = Math.ceil(filteredJobs.length / itemsPerPage);
@@ -54,9 +53,17 @@ const JobList = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {paginatedJobs.length > 0 ? (
-          paginatedJobs.map((job) => <Jobx key={job.id} {...job} />)
+          paginatedJobs.map((job) => (
+            <div
+              key={job.id}
+              className="p-4 border rounded-xl shadow-md bg-white hover:shadow-lg transition-all"
+            >
+              <h3 className="text-lg font-bold">{job.jobTitle}</h3>
+              <p className="text-sm text-gray-600">{job.company}</p>
+            </div>
+          ))
         ) : (
-          <p className="text-gray-500">No active jobs found.</p>
+          <p className="text-gray-500">No jobs found.</p>
         )}
       </div>
 
