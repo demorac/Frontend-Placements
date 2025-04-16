@@ -37,9 +37,9 @@ const AppRoutes = () => {
 
                         {/* Protected Routes (Require authentication) */}
                         <Route path="/find-jobs" element={<ProtectedRoutes allowedRoles={['APPLICANT']}><FindJobs /></ProtectedRoutes>} />
-                        <Route path="/find-talent" element={<ProtectedRoutes allowedRoles={['EMPLOYER']}><FindTalentPage /></ProtectedRoutes>} />
-                        <Route path="/post-job/:id" element={<ProtectedRoutes allowedRoles={['EMPLOYER']}><PostJobPage /></ProtectedRoutes>} />
-                        <Route path="/posted-job/:id" element={<ProtectedRoutes allowedRoles={['EMPLOYER']}><PostedJobPage /></ProtectedRoutes>} />
+                        <Route path="/find-talent" element={<ProtectedRoutes allowedRoles={['EMPLOYER', 'ADMIN']}><FindTalentPage /></ProtectedRoutes>} />
+                        <Route path="/post-job/:id" element={<ProtectedRoutes allowedRoles={['EMPLOYER', 'ADMIN']}><PostJobPage /></ProtectedRoutes>} />
+                        <Route path="/posted-job/:id" element={<ProtectedRoutes allowedRoles={['EMPLOYER', 'ADMIN']}><PostedJobPage /></ProtectedRoutes>} />
                         <Route path="/job-history" element={<ProtectedRoutes allowedRoles={['APPLICANT']}><JobHistoryPage /></ProtectedRoutes>} />
 
                         {/* Public Routes (Accessible to all, but redirect if logged in) */}
