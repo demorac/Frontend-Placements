@@ -41,6 +41,8 @@ const AppRoutes = () => {
                         <Route path="/post-job/:id" element={<ProtectedRoutes allowedRoles={['EMPLOYER', 'ADMIN']}><PostJobPage /></ProtectedRoutes>} />
                         <Route path="/posted-job/:id" element={<ProtectedRoutes allowedRoles={['EMPLOYER', 'ADMIN']}><PostedJobPage /></ProtectedRoutes>} />
                         <Route path="/job-history" element={<ProtectedRoutes allowedRoles={['APPLICANT']}><JobHistoryPage /></ProtectedRoutes>} />
+                        <Route path="/job-match" element={<ProtectedRoutes allowedRoles={['ADMIN']}><JobListPage /></ProtectedRoutes>} />
+                        <Route path="/matching-profiles/:id" element={<ProtectedRoutes allowedRoles={['ADMIN']}><MatchingProfiles /></ProtectedRoutes>} />
 
                         {/* Public Routes (Accessible to all, but redirect if logged in) */}
                         <Route path="/signup" element={<PublicRoute><SignupPage /></PublicRoute>} />
@@ -52,8 +54,7 @@ const AppRoutes = () => {
                         <Route path="/apply-job/:id" element={<ApplyJobPage />} />
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/talent-profile/:id" element={<TalentProfilePage />} />
-                        <Route path="/job-match" element={<JobListPage />} />
-                        <Route path="/matching-profiles/:id" element={<MatchingProfiles />} />
+                        
                         <Route path="/compro" element={<ComProPage />} />
                         <Route path="/invited" element={<InvitedCandidates />} />
                         <Route path="/unauthorized" element={<Unauthorized />} />
